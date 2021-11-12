@@ -1,13 +1,17 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PreventDeskTool.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PreventDeskTool
@@ -23,13 +27,23 @@ namespace PreventDeskTool
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
-            services.AddDbContext<PDTDBContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DBServer")));
-            
-            
-            
-            
-            services.AddControllersWithViews();
+        {
+           services.AddDbContext<PreventDeskToolDBContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("DBServer")));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = "/Authentication/Login";
+                options.AccessDeniedPath = "/Authentication/AccessDenied";
+                options.LogoutPath = "/Authentication/Logout";
+                
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminUser", policy => policy.RequireClaim(ClaimTypes.Role, "AdminUser"));
+            });
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,8 +63,9 @@ namespace PreventDeskTool
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+         
 
             app.UseEndpoints(endpoints =>
             {
