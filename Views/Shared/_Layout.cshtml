@@ -167,8 +167,29 @@
     <!-- ChartJS -->
     <script src="~/assets/plugins/chart.js/Chart.min.js"></script>
 
+    <script>
 
-        }, 3000);
+        $(function () {
+
+            setInterval(function () {
+
+                const Status = window.navigator.onLine;
+                if (Status) {
+                    $('.InternetStatus').text('(Online)');
+                    $('.InternetStatus').removeClass('text-danger');
+                    $('.InternetStatus').addClass('text-success');
+
+                }
+
+                else {
+                    $('.InternetStatus').text('(Offline)');
+                    $('.InternetStatus').removeClass('text-success');
+                    $('.InternetStatus').addClass('text-danger');
+
+                }
+
+            }, 3000);
+        });
     </script>
 
 
