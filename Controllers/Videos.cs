@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PreventDeskTool.Controllers
 {
     [Authorize(Policy = "AuthorizedUser")]
-    public class DashboardController : Controller
+    public class Videos : Controller
     {
         public IActionResult Index()
         {

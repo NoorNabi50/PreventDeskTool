@@ -15,7 +15,7 @@ namespace PreventDeskTool.Controllers
     [Authorize]
     public class AuthenticationController : Controller
     {
-        private PreventDeskToolDBContext DBcontext;
+        private readonly PreventDeskToolDBContext DBcontext;
         public AuthenticationController(PreventDeskToolDBContext context)
         {
             DBcontext = context;
@@ -30,28 +30,35 @@ namespace PreventDeskTool.Controllers
         [AllowAnonymous]
         public ActionResult Login(Users user)
         {
-            user = DBcontext.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
-            if (user != null)
+            try
             {
-                List<Claim> Claimsprops = new()
+                var u = DBcontext.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
+                if (u != null)
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.NameIdentifier, user.UserCode),
-                    new Claim(ClaimTypes.Role, user.Role)
-                };
+                    List<Claim> Claimsprops = new()
+                    {
+                        new Claim(ClaimTypes.Name, u.UserName),
+                        new Claim(ClaimTypes.NameIdentifier, u.UserCode),
+                        new Claim(ClaimTypes.Role, u.Role)
+                    };
 
-                ClaimsIdentity identity = new(Claimsprops, CookieAuthenticationDefaults.AuthenticationScheme);
-                AuthenticationProperties properties = new()
-                {
-                    IsPersistent = user.IsRemeber,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(7)
+                    ClaimsIdentity identity = new(Claimsprops, CookieAuthenticationDefaults.AuthenticationScheme);
+                    AuthenticationProperties properties = new()
+                    {
+                        IsPersistent = user.IsRemember,
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(7)
+                    };
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), properties);
+                    return RedirectToAction("Index", "Dashboard");
+                }
 
-                };
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), properties);
-                return RedirectToAction("Index", "Dashboard");
+                return View("Index");
             }
 
-            return View("Index");
+            catch (Exception e)
+            {
+                return View("Index");
+            }
         }
 
         [AllowAnonymous]
@@ -60,19 +67,13 @@ namespace PreventDeskTool.Controllers
             return View();
         }
         
-
-
         [AllowAnonymous]
-
-        public ActionResult Logout()
+      public ActionResult Logout()
         {
             HttpContext.SignOutAsync();
             return View("Index");
         }
         
-        //Authorize user with its role
-
-
     }
 
 }

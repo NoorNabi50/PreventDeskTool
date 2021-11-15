@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PreventDeskTool;
 
 namespace PreventDeskTool.Migrations
 {
     [DbContext(typeof(PreventDeskToolDBContext))]
-    partial class PreventDeskToolDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211112125706_ModifyColumnName")]
+    partial class ModifyColumnName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

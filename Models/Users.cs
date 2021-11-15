@@ -19,7 +19,7 @@ namespace PreventDeskTool.Models
    
         public string PhoneNo { get; set; }
 
-        public bool IsRemeber { get; set; }
+        public bool IsRemember { get; set; }
         public string Role { get; set; }
     }
 }
