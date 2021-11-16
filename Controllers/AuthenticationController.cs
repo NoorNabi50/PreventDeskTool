@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 
 namespace PreventDeskTool.Controllers
 {
-    [Authorize]
-    public class AuthenticationController : Controller
+     public class AuthenticationController : Controller
     {
         private readonly PreventDeskToolDBContext DBcontext;
         public AuthenticationController(PreventDeskToolDBContext context)
@@ -21,13 +20,11 @@ namespace PreventDeskTool.Controllers
             DBcontext = context;
         }
 
-        [AllowAnonymous]
-        public IActionResult Index()
+         public IActionResult Index()
         {
             return View();
         }
 
-        [AllowAnonymous]
         public ActionResult Login(Users user)
         {
             try
@@ -61,13 +58,11 @@ namespace PreventDeskTool.Controllers
             }
         }
 
-        [AllowAnonymous]
        public ActionResult AccessDenied()
         {
             return View();
         }
         
-        [AllowAnonymous]
       public ActionResult Logout()
         {
             HttpContext.SignOutAsync();

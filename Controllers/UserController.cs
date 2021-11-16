@@ -78,7 +78,7 @@ namespace PreventDeskTool.Controllers
         {
             try
             {
-                DBContext.Remove(new Users() { UserId = id });
+                DBContext.Users.Remove(new Users() { UserId = id });
                 DBContext.SaveChanges();
                 return "Success";
             }

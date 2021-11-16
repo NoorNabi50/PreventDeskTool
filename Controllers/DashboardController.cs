@@ -14,5 +14,10 @@ namespace PreventDeskTool.Controllers
         {
             return View();
         }
+
+        public IActionResult PartialDashboard()
+        {
+            return View();
+        }
     }
 }
