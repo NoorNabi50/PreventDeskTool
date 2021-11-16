@@ -12,6 +12,7 @@ $(partialcomponentbody).delegate(".Deletebtn", "click", function () {
 
         if (data == 'Success') {
             RenderPartial(redirecturl, partialcomponentbody);
+            ToastAlert('Deleted', 'success');
         }
         else {
             console.log(data);
