@@ -8,9 +8,12 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Users</h3>
+        <span class="card-title">Users</span>
+        <a href="#" style="margin-left: 1169px;" class="Rendercomponent btn btn-primary" endpoint="/User/GetUser">New</a>
+
     </div>
     <div class="card-body">
+         
         <table id="datatable" class="table table-sm table-bordered table-striped">
             <thead class="bg-blue">
                 <tr>
@@ -23,21 +26,21 @@
             </thead>
 
             <tbody>
-            @foreach(PreventDeskTool.Models.Users users in Model)
-            {
-                <tr>
-                    <td>@users.UserName</td>
-                    <td>@users.PhoneNo</td>
-                    <td>@users.Password</td>
-                    <td>@users.Role</td>
-                    <td><button type="button" class="btn btn-info">Edit</button> <button id="@users.UserId" type="button" endpoint="/User/DeleteUser" redirecturlpoint="/User/Index" class="btn btn-danger Deletebtn">Delete</button> </td>
-                </tr>
-            }
+                @foreach (PreventDeskTool.Models.Users users in Model)
+                {
+                    <tr>
+                        <td>@users.UserName</td>
+                        <td>@users.PhoneNo</td>
+                        <td>@users.Password</td>
+                        <td>@users.Role</td>
+                        <td><a href="#" class="btn btn-info Rendercomponent" endpoint="/User/GetUser?id=@users.UserId">Edit</a> <a href="#" id="@users.UserId" endpoint="/User/DeleteUser" redirecturlpoint="/User/Index" class="btn btn-danger Deletebtn">Delete</a> </td>
+                    </tr>
+                }
 
 
             </tbody>
-            </table>
-        
-</div>
+        </table>
 
-</div>
+    </div>
+
+    </div>

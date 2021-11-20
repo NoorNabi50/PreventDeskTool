@@ -23,7 +23,7 @@ function RenderPartial(url, renderhere) {
 //toast for alerts
 
 
-function ToastAlert(message, type) {
+function ToastAlert(message, type,color) {
 
     const Toast = Swal.mixin({
         toast: true,
@@ -38,14 +38,25 @@ function ToastAlert(message, type) {
         icon: type,
         title: message,
         width: 600,
-        background:'teal'
+        background:color
     })
 
 }
 
 
+function PopUpAlert(message,type,heading) {
+
+    Swal.fire(
+        heading,
+        message,
+        type
+    )
+}
+
+
 
 function AjaxRequest(URL, Type, obj, CallBack) {
+    debugger;
     $.ajax({
         url: URL,
         datatype: 'JSON',
@@ -56,7 +67,7 @@ function AjaxRequest(URL, Type, obj, CallBack) {
         },
         complete: function () { console.log('Loader finshed'); },
         success: CallBack,
-        error: function () { console.log('Something went wrong'); }
+        error: function (error) { RenderPartial('/Authentication/AccessDenied', $('#partialComponentbody')) }
 
     });
 }

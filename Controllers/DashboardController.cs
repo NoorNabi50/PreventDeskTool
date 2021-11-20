@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PreventDeskTool.Controllers
 {
-    [Authorize(Policy = "AuthorizedUser")]
+    [Authorize]
     public class DashboardController : Controller
     {
         public IActionResult Index()

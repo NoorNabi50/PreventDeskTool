@@ -1,9 +1,42 @@
-﻿@{ 
+﻿@using PreventDeskTool
+@model IEnumerable<PreventDeskTool.Models.Videos>
+@{
     Layout = null;
 }
 
 
-<center>
+<div class="row">
+<div class="col-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4 class="card-title">Videos</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @if(Model.Count()>0 && Model !=null)
+                {
+                @foreach (PreventDeskTool.Models.Videos videos in Model)
+                {
+                <div class="col-sm-4">
+                    <a class="btn btn-primary">Play</a>
+                    <a href="#">
+                        <video id="showvideo" controls width="400" height="260">
+                            <source id="videosrc" src="~/Videos/@videos.VideoPath" type="video/mp4" />
+                        </video>
 
-    <h2 class="text-blue">Videos</h2>
-</center>
+                    </a>
+                </div>
+                }
+              }
+
+             else
+            {
+                <h3 class="text-danger text-center">NO Videos Available</h3>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+

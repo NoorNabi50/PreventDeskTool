@@ -34,8 +34,7 @@ namespace PreventDeskTool
             {
                 options.AddPolicy("AuthorizedUser", (policy) =>
                 {
-
-                    policy.RequireClaim(ClaimTypes.Role, new string[] { "AdminUser", "PlayerUser" });
+                 policy.RequireClaim(ClaimTypes.Role, new string[] { "AdminUser", "PlayerUser" });
                 });
 
                 options.AddPolicy("AuthorizedStudent", (policy) =>

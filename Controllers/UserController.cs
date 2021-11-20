@@ -27,11 +27,11 @@ namespace PreventDeskTool.Controllers
 
         [HttpPost]
 
-        public string SaveUser(Users u)
+        public string SaveUser(Users entity)
         {
             try
             {
-                DBContext.Users.Add(u);
+                DBContext.Users.Add(entity);
                 DBContext.SaveChanges();
                 return "Success";
             }
@@ -46,18 +46,25 @@ namespace PreventDeskTool.Controllers
 
         public ActionResult GetUser(int id = 0)
         {
-            return View(DBContext.Users.Find(id));
+            try
+            {
+                return View(DBContext.Users.Find(id));
+            }
 
+            catch(Exception e)
+            {
+                return View("Index");
+            }
         }
 
         [HttpPost]
-        public string UpdateUser(Users u)
+        public string UpdateUser(Users entity)
         {
             try
             {
-                if (u.UserId >0)
+                if (entity.UserId >0)
                 {
-                    DBContext.Update(u);
+                    DBContext.Update(entity);
                     DBContext.SaveChanges();
                     return "Success";
                 }

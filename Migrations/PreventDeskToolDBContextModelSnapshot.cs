@@ -47,6 +47,30 @@ namespace PreventDeskTool.Migrations
 
                     b.ToTable("Users");
                 });
+
+            modelBuilder.Entity("PreventDeskTool.Models.Videos", b =>
+                {
+                    b.Property<int>("VideoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DifficultyCategory")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VideoName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoSize")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VideoId");
+
+                    b.ToTable("Videos");
+                });
 #pragma warning restore 612, 618
         }
     }

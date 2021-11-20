@@ -22,6 +22,7 @@ namespace PreventDeskTool
         }
 
        public  DbSet<Users> Users { get; set; }
-
+       public  DbSet<Videos> Videos { get; set; }
+       
     }
 }

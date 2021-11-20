@@ -43,7 +43,7 @@ namespace PreventDeskTool.Controllers
                     AuthenticationProperties properties = new()
                     {
                         IsPersistent = user.IsRemember,
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(7)
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
                     };
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), properties);
                     return RedirectToAction("Index", "Dashboard");
