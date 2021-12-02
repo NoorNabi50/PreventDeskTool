@@ -15,17 +15,18 @@
             <div class="row">
                 @if(Model.Count()>0 && Model !=null)
                 {
+
                 @foreach (PreventDeskTool.Models.Videos videos in Model)
                 {
-                <div class="col-sm-4">
-                    <a class="btn btn-primary">Play</a>
+                    <div class="col-sm-4">
+                    <span class="btn btn-primary">Execute</span>
                     <a href="#">
-                        <video id="showvideo" controls width="400" height="260">
-                            <source id="videosrc" src="~/Videos/@videos.VideoPath" type="video/mp4" />
+                        <video id="showvideo" src="~/Videos/@videos.VideoPath" controls width="400" height="260">
+                            
                         </video>
 
                     </a>
-                </div>
+                    </div>
                 }
               }
 

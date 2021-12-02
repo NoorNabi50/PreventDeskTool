@@ -49,11 +49,10 @@ namespace PreventDeskTool.Controllers
                 context.Videos.Add(vid);
                 context.SaveChanges();
                 int id = vid.VideoId;
-                int count = context.Videos.ToList().Count;
                 if (id > 0)
                 {
                     vid =  context.Videos.Where(x => x.VideoId == id).FirstOrDefault();
-                    vid.TotalVideos = count;   
+                    vid.TotalVideos = context.Videos.ToList().Count;
                     return vid;
                 }
             }

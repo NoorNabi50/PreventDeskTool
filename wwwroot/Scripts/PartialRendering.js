@@ -5,6 +5,7 @@ $('.Rendercomponent').click(function () {
     const PartialComponentbody = $('#partialComponentbody');
     if (Endpointurl) {
         RenderPartial(Endpointurl, PartialComponentbody)
+        return;
     }
 });
 

@@ -11,10 +11,9 @@ function RenderPartial(url, renderhere) {
             });
         }
 
-        else {
+        else 
             console.log("Data mein kuch nhi aahya");
-            return
-        }
+        
     })
 
 }
@@ -45,13 +44,12 @@ function ToastAlert(message, type,color) {
 
 
 function PopUpAlert(message,type,heading) {
-
     Swal.fire(
         heading,
         message,
         type
     )
-}
+} 
 
 
 

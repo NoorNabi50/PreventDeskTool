@@ -35,16 +35,14 @@ $(partialcomponentbody).delegate('.Savedata', 'click', function () {
     redirecturl = $(formid).attr('redirecturlpoint');
 
     AjaxRequest(url, 'POST',  $(formid).serialize() , (data) => {
+        
+        if (data == 'Success')
+            ToastAlert('Saved', 'success', 'teal');
+        else 
+            ToastAlert('Failed', 'warning', '#e12e1c');
+        
+     RenderPartial(redirecturl, partialcomponentbody);
 
-        if (data == 'Success') {
-            RenderPartial(redirecturl, partialcomponentbody);
-            ToastAlert('Saved', 'success','teal');
-        }
-
-        else {
-            RenderPartial(redirecturl, partialcomponentbody);
-            ToastAlert('Failed', 'warning','#e12e1c');
-        }
     })
 
 })
