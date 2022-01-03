@@ -14,6 +14,7 @@ namespace PreventDeskTool
         public PreventDeskToolDBContext(DbContextOptions<PreventDeskToolDBContext> options)
             : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,6 +24,9 @@ namespace PreventDeskTool
 
        public  DbSet<Users> Users { get; set; }
        public  DbSet<Videos> Videos { get; set; }
+
+       public DbSet<VideoAnomaly> VideoAnomalies { get; set; }
+       
        
     }
 }

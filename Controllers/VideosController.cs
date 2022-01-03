@@ -59,7 +59,6 @@ namespace PreventDeskTool.Controllers
             return null;
         }
 
-
         private string SaveFile(IFormFile file)
         {
             try
@@ -76,7 +75,7 @@ namespace PreventDeskTool.Controllers
 
             catch(Exception e)
             {
-                return e.ToString();
+                return "Failed";
             }
 
         }

@@ -69,3 +69,4 @@ function AjaxRequest(URL, Type, obj, CallBack) {
 
     });
 }
+

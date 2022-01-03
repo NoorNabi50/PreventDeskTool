@@ -23,5 +23,7 @@ namespace PreventDeskTool.Models
         [NotMapped]
         public int TotalVideos { get; set; }
 
+
+        public ICollection<VideoAnomaly> VideoAnomalies { get; set; }
     }
 }
