@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +25,9 @@ namespace PreventDeskTool.Models
         public int TotalVideos { get; set; }
 
 
-        public ICollection<VideoAnomaly> VideoAnomalies { get; set; }
+        public ICollection<VideoMcQs> VideoMcQsOptions { get; set; }
+
+        [NotMapped]
+        public IFormFile Videofile{ get; set; }
     }
 }

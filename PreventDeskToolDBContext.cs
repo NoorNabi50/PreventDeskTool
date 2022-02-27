@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using PreventDeskTool.Models;
 
 namespace PreventDeskTool
@@ -24,8 +23,7 @@ namespace PreventDeskTool
 
        public  DbSet<Users> Users { get; set; }
        public  DbSet<Videos> Videos { get; set; }
-
-       public DbSet<VideoAnomaly> VideoAnomalies { get; set; }
+       public DbSet<VideoMcQs> VideoMCQs { get; set; }
        
        
     }

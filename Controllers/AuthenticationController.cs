@@ -48,12 +48,14 @@ namespace PreventDeskTool.Controllers
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), properties);
                     return RedirectToAction("Index", "Dashboard");
                 }
-
+                ViewBag.Message = "Logged In Failed";
                 return View("Index");
             }
 
             catch (Exception e)
             {
+
+                ViewBag.Message = e.ToString();
                 return View("Index");
             }
         }

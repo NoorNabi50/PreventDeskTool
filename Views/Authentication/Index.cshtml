@@ -27,9 +27,11 @@
                 <a href="#" class="h1"><b>Prevention</b>Tool</a>
             </div>
             <div class="card-body">
+                <p>@ViewBag.Message</p>
                 <p class="login-box-msg">Login in to start your session</p>
 
                 <form action="/Authentication/Login" method="post">
+
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="UserName" placeholder="Email">
                         <div class="input-group-append">

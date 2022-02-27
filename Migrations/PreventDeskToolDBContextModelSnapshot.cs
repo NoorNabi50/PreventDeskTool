@@ -49,18 +49,21 @@ namespace PreventDeskTool.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PreventDeskTool.Models.VideoAnomaly", b =>
+            modelBuilder.Entity("PreventDeskTool.Models.VideoMcQs", b =>
                 {
-                    b.Property<int>("AnomalyId")
+                    b.Property<int>("OptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("AnomalyInterval")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("OptionPercentage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OptionText")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VideoId")
                         .HasColumnType("int");
@@ -68,11 +71,11 @@ namespace PreventDeskTool.Migrations
                     b.Property<int?>("VideosVideoId")
                         .HasColumnType("int");
 
-                    b.HasKey("AnomalyId");
+                    b.HasKey("OptionId");
 
                     b.HasIndex("VideosVideoId");
 
-                    b.ToTable("VideoAnomalies");
+                    b.ToTable("VideoMCQs");
                 });
 
             modelBuilder.Entity("PreventDeskTool.Models.Videos", b =>
@@ -99,7 +102,7 @@ namespace PreventDeskTool.Migrations
                     b.ToTable("Videos");
                 });
 
-            modelBuilder.Entity("PreventDeskTool.Models.VideoAnomaly", b =>
+            modelBuilder.Entity("PreventDeskTool.Models.VideoMcQs", b =>
                 {
                     b.HasOne("PreventDeskTool.Models.Videos", null)
                         .WithMany("VideoAnomalies")

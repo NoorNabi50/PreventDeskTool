@@ -12,14 +12,14 @@ $(partialcomponentbody).delegate(".Deletebtn", "click", function () {
     redirecturl = $(this).attr('redirecturlpoint');
     id = $(this).attr('Id');
 
-    AjaxRequest(url, 'POST', { id }, (data) => {
+    AjaxRequest(url, 'POST', { id }, (response) => {
 
-        if (data == 'Success') {
+        if (response == 'Success') {
             RenderPartial(redirecturl, partialcomponentbody);
             ToastAlert('Deleted', 'success','teal');
         }
         else 
-            console.log(data);
+            console.log(response);
         
     })
 
@@ -34,9 +34,9 @@ $(partialcomponentbody).delegate('.Savedata', 'click', function () {
     url = $(formid).attr('endpoint');
     redirecturl = $(formid).attr('redirecturlpoint');
 
-    AjaxRequest(url, 'POST',  $(formid).serialize() , (data) => {
+    AjaxRequest(url, 'POST', $(formid).serialize(), (response) => {
         
-        if (data == 'Success')
+        if (response == 'Success')
             ToastAlert('Saved', 'success', 'teal');
         else 
             ToastAlert('Failed', 'warning', '#e12e1c');

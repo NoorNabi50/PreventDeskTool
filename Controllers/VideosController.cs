@@ -40,24 +40,26 @@ namespace PreventDeskTool.Controllers
         [HttpPost]
         [Authorize(Policy = "AuthorizedAdmin")]
 
-        public Videos UploadVideo(IFormFile video)
+        public Videos UploadVideo(Videos video)
         {
-            string filePath = SaveFile(video);
-            if (filePath.Contains(video.FileName))
+            string filePath = SaveFile(video.Videofile);
+            if (filePath.Contains(video.Videofile.FileName))
             {
-                Videos vid = new() { VideoName = video.FileName, VideoPath = filePath, DifficultyCategory = 1 };
-                context.Videos.Add(vid);
+                video.VideoName = video.Videofile.FileName;
+                video.VideoPath = filePath;
+                context.Videos.Add(video);
                 context.SaveChanges();
-                int id = vid.VideoId;
+                int id = video.VideoId;
                 if (id > 0)
                 {
-                    vid =  context.Videos.Where(x => x.VideoId == id).FirstOrDefault();
-                    vid.TotalVideos = context.Videos.ToList().Count;
-                    return vid;
+                    video =  context.Videos.Where(x => x.VideoId == id).FirstOrDefault();
+                    video.TotalVideos = context.Videos.ToList().Count;
+                    return video;
                 }
             }
             return null;
         }
+
 
         private string SaveFile(IFormFile file)
         {
@@ -79,6 +81,7 @@ namespace PreventDeskTool.Controllers
             }
 
         }
+
 
 
 
