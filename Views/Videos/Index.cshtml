@@ -2,6 +2,7 @@
 @model IEnumerable<PreventDeskTool.Models.Videos>
 @{
     Layout = null;
+    bool isAdmin = User.IsInRole("AdminUser");
 }
 
 
@@ -18,9 +19,12 @@
 
                 @foreach (PreventDeskTool.Models.Videos video in Model)
                 {
-                    <div class="col-sm-4">
-                  <a class="btn btn-primary" id="DeleteVideo" data-id="@video.VideoId">Delete</a>
-                    <a href="#">
+                            <div class="col-sm-4">
+                                @if (isAdmin)
+                                {
+                                    <a class="btn btn-primary DeleteVideo"  data-id="@video.VideoId">Delete</a>
+                                }
+                                <a href="#">
                         <video id="showvideo" src="~/Videos/@video.VideoPath" controls width="400" height="260">                  
                         </video>
 

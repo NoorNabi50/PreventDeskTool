@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Security.Claims;
 
 namespace PreventDeskTool
@@ -25,8 +27,14 @@ namespace PreventDeskTool
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                 options.LoginPath = "/Authentication/Login";
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
                 options.AccessDeniedPath = "/Authentication/AccessDenied";
                 options.LogoutPath = "/Authentication/Logout";
+                options.Cookie.IsEssential = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.SlidingExpiration = true;        
+
 
             });
 
@@ -35,12 +43,6 @@ namespace PreventDeskTool
                 options.AddPolicy("AuthorizedUser", (policy) =>
                 {
                  policy.RequireClaim(ClaimTypes.Role, new string[] { "AdminUser", "PlayerUser" });
-                });
-
-                options.AddPolicy("AuthorizedStudent", (policy) =>
-                {
-                    policy.RequireClaim(ClaimTypes.Role, new string[] { "AdminUser", "PlayerUser" });
-
                 });
 
                 options.AddPolicy("AuthorizedAdmin", (policy) =>

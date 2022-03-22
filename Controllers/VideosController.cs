@@ -83,7 +83,20 @@ namespace PreventDeskTool.Controllers
         }
 
 
+        public string DeleteVideo(int id = 0)
+        {
+            try
+            {
+                context.Videos.Remove(new Videos() { VideoId = id });
+                context.SaveChanges();
+                return "Success";
+            }
 
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
 
 
 

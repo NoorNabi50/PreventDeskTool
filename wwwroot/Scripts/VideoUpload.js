@@ -134,6 +134,24 @@ $('#partialComponentbody').delegate('#SaveData', 'click', function () {
 });
 
 
+
+
+$('#partialComponentbody').delegate('.DeleteVideo', 'click', function () {
+    debugger;
+    const id = $(this).data('id');
+    AjaxRequest("/Videos/DeleteVideo", 'GET', { id }, function (response) {
+        if (response == 'Success') {
+            RenderPartial('/Videos/Index', $('#partialComponentbody'));
+            ToastAlert('Deleted', 'success', 'teal');
+        }
+        else {
+
+            ToastAlert('Failed', 'warning', '#e12e1c');
+            console.log(response);
+        }
+    })
+})
+
 function CreateVideoMcqsObject() {
     debugger;
     let objArr = [];

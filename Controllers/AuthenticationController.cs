@@ -25,6 +25,26 @@ namespace PreventDeskTool.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public IActionResult Register(Users users)
+        {
+            users.Role = "PlayerUser";
+            DBcontext.Users.Add(users);
+            DBcontext.SaveChanges();
+            return View("Index");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Register()
+        { 
+            return View();
+        }
+
+
+
         public ActionResult Login(Users user)
         {
             try
@@ -32,6 +52,7 @@ namespace PreventDeskTool.Controllers
                 var u = DBcontext.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
                 if (u != null)
                 {
+                    u.UserCode = u.UserCode == null ? "" : u.UserCode;
                     List<Claim> Claimsprops = new()
                     {
                         new Claim(ClaimTypes.Name, u.UserName),
@@ -43,19 +64,18 @@ namespace PreventDeskTool.Controllers
                     AuthenticationProperties properties = new()
                     {
                         IsPersistent = user.IsRemember,
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+                        
                     };
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), properties);
                     return RedirectToAction("Index", "Dashboard");
+                   
                 }
-                ViewBag.Message = "Logged In Failed";
+                ViewBag.Message = "Incorrect UserName or Password Please Try Again!";
                 return View("Index");
             }
 
             catch (Exception e)
             {
-
-                ViewBag.Message = e.ToString();
                 return View("Index");
             }
         }
@@ -64,7 +84,7 @@ namespace PreventDeskTool.Controllers
         {
             return View();
         }
-        
+
       public ActionResult Logout()
         {
             HttpContext.SignOutAsync();
