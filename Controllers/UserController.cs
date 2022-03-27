@@ -105,7 +105,8 @@ namespace PreventDeskTool.Controllers
 
         public IActionResult ViewProfile()
         {
-            return View();
+            Users userInfo = DBContext.Users.Where(x => x.UserId == int.Parse(User.FindFirst("UserId").Value)).FirstOrDefault();
+            return View(userInfo);
         }
 
 
