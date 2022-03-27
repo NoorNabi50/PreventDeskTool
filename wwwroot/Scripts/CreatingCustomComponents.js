@@ -6,6 +6,7 @@ function RenderPartial(url, renderhere) {
         if (data) {
             $(renderhere).empty();
             $(renderhere).append(data);
+           
             $('#datatable').DataTable({
                 "responsive": "true"
             });
@@ -61,9 +62,11 @@ function AjaxRequest(URL, Type, obj, CallBack) {
         type: Type,
         data: obj,
         beforeSend: function () {
-            console.log('Loader started');
+
+            $('.preloader').removeAttr('style'); $('.animation__wobble').show();
+
         },
-        complete: function () { console.log('Loader finshed'); },
+        complete: function () { $('.preloader').attr('style', 'height:0px'); $('.animation__wobble').hide(); },
         success: CallBack,
         error: function (error) { RenderPartial('/Authentication/AccessDenied', $('#partialComponentbody')) }
 

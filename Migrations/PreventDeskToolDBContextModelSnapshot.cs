@@ -19,12 +19,36 @@ namespace PreventDeskTool.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("PreventDeskTool.Models.Chat", b =>
+                {
+                    b.Property<int>("ChatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MessageText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MessageTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ChatId");
+
+                    b.ToTable("Chat");
+                });
+
             modelBuilder.Entity("PreventDeskTool.Models.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsRemember")
                         .HasColumnType("bit");
@@ -34,6 +58,12 @@ namespace PreventDeskTool.Migrations
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
@@ -105,13 +135,13 @@ namespace PreventDeskTool.Migrations
             modelBuilder.Entity("PreventDeskTool.Models.VideoMcQs", b =>
                 {
                     b.HasOne("PreventDeskTool.Models.Videos", null)
-                        .WithMany("VideoAnomalies")
+                        .WithMany("VideoMcQsOptions")
                         .HasForeignKey("VideosVideoId");
                 });
 
             modelBuilder.Entity("PreventDeskTool.Models.Videos", b =>
                 {
-                    b.Navigation("VideoAnomalies");
+                    b.Navigation("VideoMcQsOptions");
                 });
 #pragma warning restore 612, 618
         }

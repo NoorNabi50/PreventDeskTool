@@ -26,6 +26,7 @@ namespace PreventDeskTool.Controllers
 
         public IActionResult Index()
         {
+         
             return View(context.Videos.ToList());
         }
         
@@ -42,7 +43,7 @@ namespace PreventDeskTool.Controllers
 
         public Videos UploadVideo(Videos video)
         {
-            string filePath = SaveFile(video.Videofile);
+            string filePath = UploadFile.SaveFile(video.Videofile,HostingEnvironment.WebRootPath,"Videos");
             if (filePath.Contains(video.Videofile.FileName))
             {
                 video.VideoName = video.Videofile.FileName;
@@ -59,29 +60,6 @@ namespace PreventDeskTool.Controllers
             }
             return null;
         }
-
-
-        private string SaveFile(IFormFile file)
-        {
-            try
-            {
-                string Folderpath = Path.Combine(HostingEnvironment.WebRootPath, "Videos");
-                string File = Guid.NewGuid().ToString() + '-' + file.FileName;
-                string CompletePath = Path.Combine(Folderpath, File);
-                FileStream fileStream = System.IO.File.Create(CompletePath);
-                file.CopyTo(fileStream);
-                fileStream.Dispose();
-                return File;
-
-            }
-
-            catch(Exception e)
-            {
-                return "Failed";
-            }
-
-        }
-
 
         public string DeleteVideo(int id = 0)
         {

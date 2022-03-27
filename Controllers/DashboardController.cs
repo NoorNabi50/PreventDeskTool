@@ -17,7 +17,9 @@ namespace PreventDeskTool.Controllers
 
         public IActionResult PartialDashboard()
         {
-            return View();
+                
+            return PartialView("~/Views/Dashboard/Index.cshtml");
+      
         }
     }
 }

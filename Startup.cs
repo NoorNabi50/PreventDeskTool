@@ -34,8 +34,6 @@ namespace PreventDeskTool
                 options.Cookie.IsEssential = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                 options.SlidingExpiration = true;        
-
-
             });
 
             services.AddAuthorization(options =>

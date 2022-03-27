@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using PreventDeskTool.Models;
 using System;
@@ -11,10 +12,11 @@ namespace PreventDeskTool.Controllers
     public class UserController : Controller
     {
         private readonly PreventDeskToolDBContext DBContext;
-
-        public UserController(PreventDeskToolDBContext context)
+        private IWebHostEnvironment HostingEnvironment;
+        public UserController(PreventDeskToolDBContext context, IWebHostEnvironment hostEnvironment)
         {
             DBContext = context;
+            HostingEnvironment = hostEnvironment;
         }
 
 
@@ -31,6 +33,8 @@ namespace PreventDeskTool.Controllers
         {
             try
             {
+                entity.ProfilePath = UploadFile.SaveFile(entity.file, HostingEnvironment.WebRootPath, "ProfileImages");
+                entity.RegisterDate = DateTime.Now;
                 DBContext.Users.Add(entity);
                 DBContext.SaveChanges();
                 return "Success";
@@ -95,6 +99,16 @@ namespace PreventDeskTool.Controllers
                 return e.ToString();
             }
         }
+
+
+        [HttpGet]
+
+        public IActionResult ViewProfile()
+        {
+            return View();
+        }
+
+
 
     }
 }

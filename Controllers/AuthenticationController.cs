@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PreventDeskTool.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace PreventDeskTool.Controllers
 {
-     public class AuthenticationController : Controller
+    public class AuthenticationController : Controller
     {
         private readonly PreventDeskToolDBContext DBcontext;
-        public AuthenticationController(PreventDeskToolDBContext context)
+        private IWebHostEnvironment HostingEnvironment;
+        public AuthenticationController(PreventDeskToolDBContext context, IWebHostEnvironment hostEnvironment)
         {
             DBcontext = context;
+            HostingEnvironment = hostEnvironment;
         }
 
-         public IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -29,6 +29,8 @@ namespace PreventDeskTool.Controllers
         [HttpPost]
         public IActionResult Register(Users users)
         {
+            users.ProfilePath = UploadFile.SaveFile(users.file, HostingEnvironment.WebRootPath, "ProfileImages");
+            users.RegisterDate = DateTime.Now;
             users.Role = "PlayerUser";
             DBcontext.Users.Add(users);
             DBcontext.SaveChanges();
@@ -39,7 +41,7 @@ namespace PreventDeskTool.Controllers
 
         [HttpGet]
         public IActionResult Register()
-        { 
+        {
             return View();
         }
 
@@ -55,7 +57,8 @@ namespace PreventDeskTool.Controllers
                     u.UserCode = u.UserCode == null ? "" : u.UserCode;
                     List<Claim> Claimsprops = new()
                     {
-                        new Claim(ClaimTypes.Name, u.UserName),
+                        new Claim("UserId",u.UserId.ToString()),
+                        new Claim("Name", u.UserName),
                         new Claim(ClaimTypes.NameIdentifier, u.UserCode),
                         new Claim(ClaimTypes.Role, u.Role)
                     };
@@ -64,11 +67,11 @@ namespace PreventDeskTool.Controllers
                     AuthenticationProperties properties = new()
                     {
                         IsPersistent = user.IsRemember,
-                        
+
                     };
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), properties);
                     return RedirectToAction("Index", "Dashboard");
-                   
+
                 }
                 ViewBag.Message = "Incorrect UserName or Password Please Try Again!";
                 return View("Index");
@@ -80,16 +83,16 @@ namespace PreventDeskTool.Controllers
             }
         }
 
-       public ActionResult AccessDenied()
+        public ActionResult AccessDenied()
         {
             return View();
         }
 
-      public ActionResult Logout()
+        public ActionResult Logout()
         {
             HttpContext.SignOutAsync();
             return View("Index");
         }
-        
+
     }
 }
