@@ -26,6 +26,12 @@ namespace PreventDeskTool.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MessageBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MessageText")
                         .HasColumnType("nvarchar(max)");
 

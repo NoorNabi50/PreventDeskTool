@@ -18,7 +18,8 @@ namespace PreventDeskTool
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            
+
         }
 
        public  DbSet<Users> Users { get; set; }

@@ -63,10 +63,8 @@ function AjaxRequest(URL, Type, obj, CallBack) {
         data: obj,
         beforeSend: function () {
 
-            $('.preloader').removeAttr('style'); $('.animation__wobble').show();
-
         },
-        complete: function () { $('.preloader').attr('style', 'height:0px'); $('.animation__wobble').hide(); },
+        complete: function () {  },
         success: CallBack,
         error: function (error) { RenderPartial('/Authentication/AccessDenied', $('#partialComponentbody')) }
 

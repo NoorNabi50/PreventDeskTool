@@ -1,4 +1,7 @@
-﻿    <div class="modal fade" id="modal-info">
+﻿@using System.Security.Claims
+@model List<Chat>    
+
+<div class="modal fade" id="modal-info">
             <div class="modal-dialog">
                 <div class="modal-content">
                  
@@ -15,73 +18,65 @@
                             <div class="card-body">
                            
 
-                                <div class="direct-chat-messages">
-                                 
-                                    <div class="direct-chat-msg">
-                                        <div class="direct-chat-infos clearfix">
-                                            <span class="direct-chat-name float-left">Noor Nabi</span>
-                                            <span class="direct-chat-timestamp float-right">27 Jan 2:00 pm</span>
-                                        </div>
-                             
-                                        <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
-                                
-                                        <div class="direct-chat-text">
-                                          Hello Bhai
-                                        </div>
-                                  
-                                    </div>
-                              
-                                    <div class="direct-chat-msg right">
-                                        <div class="direct-chat-infos clearfix">
-                                            <span class="direct-chat-name float-right">Abdul Wahab</span>
-                                            <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                                        </div>
-                                     
-                                        <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
-                                       
-                                        <div class="direct-chat-text">
-                                          Hello Noor !!!
-                                        </div>
-                                        <!-- /.direct-chat-text -->
-                                    </div>
-                                    <!-- /.direct-chat-msg -->
-                                </div>
-                                <!--/.direct-chat-messages-->
-                                <!-- Contacts are loaded here -->
-                                <div class="direct-chat-contacts">
-                                    <ul class="contacts-list">
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="~/assets/dist/img/user1-128x128.jpg" alt="User Avatar">
+                                <div class="direct-chat-messages" style="height:500px">
 
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                                        Count Dracula
-                                                        <small class="contacts-list-date float-right">2/28/2015</small>
-                                                    </span>
-                                                    <span class="contacts-list-msg">How have you been? I was...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                    </ul>
-                                    <!-- /.contatcts-list -->
+                                    @if(Model == null)
+                                    {
+                                <p class="text-center" id="NoMessagesYet">No Messages Yet..</p>
+                            }
+                            else {
+
+                                @foreach (var chat in Model)
+                                    if (chat.MessageBy == User.FindFirst(ClaimTypes.Role).Value)
+                                    {
+                                        <div class="direct-chat-msg right">
+                                            <div class="direct-chat-infos clearfix">
+                                                <span class="direct-chat-name float-right">
+                                                    Me
+                                                </span>
+                                                <span class="direct-chat-timestamp float-left">@chat.MessageDate</span>
+                                            </div>
+
+                                            <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
+
+                                            <div class="direct-chat-text">
+                                               @chat.MessageText
+                                            </div>
+                                          
+                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="direct-chat-msg">
+                                            <div class="direct-chat-infos clearfix">
+                                                <span class="direct-chat-name float-left">@(chat.UserName == User.FindFirst("Name").Value ? chat.UserName : chat.AdminName)</span>
+                                                <span class="direct-chat-timestamp float-right">@chat.MessageDate</span>
+                                            </div>
+
+                                            <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
+
+                                            <div class="direct-chat-text">
+                                               @chat.MessageText
+                                            </div>
+
+                                        </div>
+                                    }
+                                    
+                            }
                                 </div>
-                                <!-- /.direct-chat-pane -->
+                            
+                                </div>
                             </div>
-                            <!-- /.card-body -->
-              <div class="card-footer">
-                <form action="#" method="post">
+                         
+                  <div class="card-footer">
+              
                   <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                    <input type="text" name="message" id="MessageTxt" placeholder="Type Message ..." class="form-control">
                     <span class="input-group-append">
-                      <button type="submit" class="btn btn-danger">Send</button>
+                      <button type="button" class="btn btn-danger SendMessage">Send</button>
                     </span>
                   </div>
-                </form>
               </div>
-              <!-- /.card-footer-->
             </div>
 
 
@@ -90,5 +85,4 @@
                 </div>
               
             </div>
-        </div>
-
+        
