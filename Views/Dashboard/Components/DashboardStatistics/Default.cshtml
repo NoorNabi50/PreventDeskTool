@@ -1,0 +1,95 @@
+﻿@model Tuple<int,int>
+
+<div class="row">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-blue"><i class="fas fa-thumbs-up"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Completed</span>
+                    <span class="info-box-number">4</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fas fa-file-video"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Uploads</span>
+                    <span class="info-box-number">@Model.Item2</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Users</span>
+                    <span class="info-box-number">@Model.Item1</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">New Members</span>
+                    <span class="info-box-number">2</span>
+                </div>
+
+            </div>
+        </div>
+    }
+      <div class="col-12 col-sm-6 col-md-6">
+
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title text-center" style="float:none">Traffic Accidents In Pakistan</h3>
+
+            </div>
+            <div class="card-body">
+                <div class="chart">
+                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+        </div>
+  
+    <div class="col-12 col-md-6">
+
+        <div class="card card-blue">
+            <div class="card-header">
+                <h3 class="card-title text-center" style="float:none;">Traffic Rules</h3>
+
+            </div>
+            <div class="card-body" style="padding-top:20px;padding-left:0px">
+                <ul class="text-bold">
+                    <li>Cross the road at the Zebra Crossing</li>
+                    <li>Do not run on the streets</li>
+                    <li>Always walk on the pavement</li>
+                    <li>Do not stick your hand or head out of a moving vehicle</li>
+                    <li>Get off on the safer side of the car</li>
+                    <li>Gear up for bicycle rides</li>
+                    <li>Don’t play on busy streets</li>
+                    <li>Know the traffic signs</li>
+                    <li>Strap on seatbelts in cars</li>
+                    <li>Use Padestrain bridge for crossing road</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/DashboardCharts.js"></script>

@@ -1,0 +1,67 @@
+﻿@using PreventDeskTool
+@model PreventDeskTool.Models.Users
+@{
+    Layout = null;
+    string endpoint;
+    string cardtitle;
+    if (Model != null)
+    {
+        endpoint = "/User/UpdateUser";
+        cardtitle = "Edit User";
+    }
+
+    else
+    {
+        endpoint = "/User/SaveUser";
+        cardtitle = "New User";
+    }
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="">@cardtitle</h3>
+            </div>
+         <form id="userform" endpoint="@endpoint" redirecturlpoint="/User/Index">
+             <div class="card-body">
+                 <div class="form-group">
+                     @Html.HiddenFor(x => x.UserId)
+                     @Html.HiddenFor(x=>x.UserCode)
+                     <label for="exampleInputEmail1">User Name</label>
+                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = "required", placeholder = "Enter UserName" })
+                 </div>
+                 <div class="form-group">
+                     <label for="exampleInputPassword1">Password</label>
+                     @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @required = "required", placeholder = "Enter Password" })
+                 </div>
+                 <div class="form-group">
+                     <label for="exampleInputPassword1">Phone No</label>
+                     @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control", placeholder = "Enter Phone" })
+                 </div>
+
+                 <div class="form-group">
+                     <label for="exampleInputPassword1">Role </label><label class="text-info"></label>
+                        @{ 
+                             var UserTypes = new List<string>() {
+                             new string("AdminUser"),
+                             new string("PlayerUser")
+                         };
+         }
+                     @Html.DropDownList("Role", UserTypes.Select(x => new SelectListItem() { Value = x.ToString(), Text = x.ToString() }),new { @class="form-control"})
+                 </div>
+                    
+
+
+                 <div class="card-footer">
+                     <a href="#"  class="btn btn-primary Savedata">Submit</a>
+                 </div>
+             </div>
+       </form>
+        </div>
+        
+        </div>
+    
+</div>

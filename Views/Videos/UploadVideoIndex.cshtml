@@ -1,0 +1,58 @@
+﻿@{
+
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3>New Video</h3>
+            </div>
+            <form id="videoform" enctype="multipart/form-data" endpoint="" redirecturlpoint="/User/Index">
+                <div class="card-body">
+                    <div class="row nopadding">
+                        <div class="col-lg-6">
+                            <label>MCQs Question</label>
+                            <textarea id="McqsText" class="form-control"></textarea>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="exampleInputFile">Difficulty Level</label>
+                            <select id="difficultylevel" class="form-control">
+                                <option value="0">Easy</option>
+                                <option value="1">Medium</option>
+                                <option value="2">Difficult</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="videofile" class="form-control">
+                        </div>
+                        <div class="col-lg-1">
+
+                            <div class="input-group-append">
+                                <a href="#" id="uploadvideo" style="margin-top:30px">
+                                    <span style="background-color: cornflowerblue" class="text-white input-group-text">Upload</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+            <div id="videouploadedContainer" class="ml-5">
+            </div>
+
+
+            <center>
+                <button type="button" class="btn btn-success" id="SaveData">Save</button>
+            </center>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

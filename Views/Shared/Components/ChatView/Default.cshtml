@@ -1,0 +1,93 @@
+﻿@using System.Security.Claims
+@model List<Chat>    
+
+<div class="modal fade" id="modal-info">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                 
+                    <div class="modal-body">
+
+
+                        <div class="card card-danger card-outline direct-chat direct-chat-danger">
+                            <div class="card-header">
+                                <h3 class="card-title text-center" style="float:none">
+                                    <i class="" aria-hidden="true">
+                                    Chat with @(User.FindFirst(ClaimTypes.Role).Value == "AdminUser" ? "User" :"Admin")
+                                    </i>
+                                    </h3>
+
+                               
+                            </div>
+                          
+                            <div class="card-body">
+                           
+
+                                <div class="direct-chat-messages" style="height:500px">
+
+                                    @if(Model == null)
+                                    {
+                                <p class="text-center" id="NoMessagesYet">No Messages Yet..</p>
+                            }
+                            else {
+
+                                @foreach (var chat in Model)
+                                    if (chat.MessageBy == User.FindFirst(ClaimTypes.Role).Value)
+                                    {
+                                        <div class="direct-chat-msg right">
+                                            <div class="direct-chat-infos clearfix">
+                                                <span class="direct-chat-name float-right">
+                                                    Me
+                                                </span>
+                                                <span class="direct-chat-timestamp float-left">@chat.MessageDate</span>
+                                            </div>
+
+                                            <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
+
+                                            <div class="direct-chat-text">
+                                               @chat.MessageText
+                                            </div>
+                                          
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="direct-chat-msg">
+                                            <div class="direct-chat-infos clearfix">
+                                                <span class="direct-chat-name float-left"></span>
+                                                <span class="direct-chat-timestamp float-right">@chat.MessageDate</span>
+                                            </div>
+
+                                            <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
+
+                                            <div class="direct-chat-text">
+                                               @chat.MessageText
+                                            </div>
+
+                                        </div>
+                                    }
+                                    
+                            }
+
+
+                         
+                  <div class="card-footer">
+              
+                  <div class="input-group">
+                    <input type="text" name="message" id="MessageTxt" placeholder="Type Message ..." class="form-control">
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-danger SendMessage">Send</button>
+                    </span>
+                  </div>
+              </div>
+            </div>
+
+
+                    </div>
+               
+                </div>
+              
+            </div>
+        </div>
+        </div>
+        </div>
+        

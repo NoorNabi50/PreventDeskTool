@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="">PlayGround</h3>
+             
+            </div>
+            <div class="card-body" id="playgroundBody">
+                <h2 class="text-center text-bold text-danger">Instructions</h2>
+                <p class="text-blue text-bold" id="readText">
+               <span class="text-info text-bold"> Dear <span id="loggedInUser"></span></span>...!      Welcome to PlayGround, where you can learn road traffic safety. The training session will take approximately 10 minutes 
+                    and it has three steps. 
+                    In the first step, watch each video carefully and notice the number and types of risks. At the end of each scenario,
+                    you need to type the number of risks you noticed, and a list of risks will appear, 
+                    you need to click on risks you identified in that scenario. Your score (pre-test) will appear at the end of each 
+                    scenario.
+
+                    In the second step, you will receive a safety training related to that traffic scenario. You need to complete all 5
+                    scenarios for the pre-test and safety training.
+                    Your overall score pre and post score will appear at the end. <span class="text-success text-bold text-center"> Good luck!”</span>
+                </p>
+
+                <center>
+                    <button type="button" class="btn btn-info" id="Next1">Start</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/UserPlayground.js"></script>

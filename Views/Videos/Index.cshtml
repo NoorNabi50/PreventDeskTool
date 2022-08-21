@@ -1,0 +1,46 @@
+﻿@using PreventDeskTool
+@model IEnumerable<PreventDeskTool.Models.Videos>
+@{
+    Layout = null;
+    bool isAdmin = User.IsInRole("AdminUser");
+}
+
+
+<div class="row">
+<div class="col-12">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3>Videos</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @if(Model.Count()>0 && Model !=null)
+                {
+
+                @foreach (PreventDeskTool.Models.Videos video in Model)
+                {
+                            <div class="col-sm-4">
+                                @if (isAdmin)
+                                {
+                                    <a class="btn btn-primary DeleteVideo"  data-id="@video.VideoId">Delete</a>
+                                }
+                                <a href="#">
+                        <video id="showvideo" src="~/Videos/@video.VideoPath" controls width="100%" height="260">                  
+                        </video>
+
+                    </a>
+                    </div>
+                }
+              }
+
+             else
+            {
+                <h3 class="text-danger text-center">No Videos Available!!!</h3>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+
