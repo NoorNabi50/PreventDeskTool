@@ -66,7 +66,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#modal-info">
+                    <a class="nav-link" href="#" data-toggle="modal" id="chatmodal" data-target="#modal-info">
                         <i class="far fa-comments"></i>
 
                     </a>
@@ -96,7 +96,7 @@
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
                     <div class="info">
-                        <span href="#" class="d-block text-white">Welcome ! <span id="userloggedIn"> @User.FindFirst("Name").Value.ToUpper()</span></span>
+                        <span href="#" class="d-block text-white">Welcome ! <span id="userloggedIn"> @User.FindFirst("PersonName").Value.ToUpper()</span></span>
                     </div>
                 </div>
                 <nav class="mt-2">
@@ -111,7 +111,7 @@
                             </a>
                         </li>
 
-                         <li class="nav-item">
+                        @* <li class="nav-item">
                             <a href="#"  class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
@@ -120,7 +120,7 @@
                                 </p>
                             </a>
                         </li>
-
+*@
 
                         <li class="nav-item">
                             <a href="#" endpoint="/Videos/Index" class="nav-link Rendercomponent">

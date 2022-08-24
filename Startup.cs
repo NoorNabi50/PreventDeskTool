@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Rotativa.AspNetCore;
 using System;
 using System.Security.Claims;
 
@@ -82,8 +83,10 @@ namespace PreventDeskTool
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Authentication}/{action=Index}/{id?}");
+                    pattern: "{controller=LandingWebsite}/{action=Index}/{id?}");
             });
+
+            RotativaConfiguration.Setup(env.WebRootPath);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace PreventDeskTool.Controllers
         [HttpPost]
         public IActionResult Register(Users users)
         {
-            users.ProfilePath = UploadFile.SaveFile(users.file, HostingEnvironment.WebRootPath, "ProfileImages");
+         //   users.ProfilePath =  UploadFile.SaveFile(users.file, HostingEnvironment.WebRootPath, "ProfileImages");
             users.RegisterDate = DateTime.Now;
             users.Role = "PlayerUser";
             DBcontext.Users.Add(users);
@@ -60,7 +60,9 @@ namespace PreventDeskTool.Controllers
                         new Claim("UserId",u.UserId.ToString()),
                         new Claim("Name", u.UserName),
                         new Claim(ClaimTypes.NameIdentifier, u.UserCode),
-                        new Claim(ClaimTypes.Role, u.Role)
+                        new Claim(ClaimTypes.Role, u.Role),
+                       new Claim("PersonName", u.PersonName)
+
                     };
 
                     ClaimsIdentity identity = new(Claimsprops, CookieAuthenticationDefaults.AuthenticationScheme);

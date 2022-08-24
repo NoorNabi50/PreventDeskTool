@@ -18,5 +18,7 @@ namespace PreventDeskTool.Models
 
         [NotMapped]
         public GameProgressVideo gameProgressVideo { get; set; }
+
+      
     }
 }

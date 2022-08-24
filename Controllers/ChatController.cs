@@ -28,7 +28,7 @@ namespace PreventDeskTool.Controllers
                 if (!User.IsInRole("AdminUser"))
                     chat.UserId = int.Parse(User.FindFirst("UserId").Value);
                 else
-                    chat.UserId = 1026;
+                    chat.UserId = chat.UserId;
 
                 chat.MessageTime = DateTime.Now;
                 chat.AdminId = int.Parse(_configuration["AdminId"]);
@@ -51,10 +51,15 @@ namespace PreventDeskTool.Controllers
         {
             try
             {
-                return context.Chat.Where(x => x.UserId == UserId).ToList();
+                var chats =  context.Chat.Where(x => x.UserId == UserId).ToList();
 
+                chats.ForEach((x) =>
+                {
+                    x.MessageDate = x.MessageTime.ToString("MM/dd/yyyy h:mm tt");
+                });
+                return chats;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }

@@ -1,7 +1,6 @@
 ﻿var speechObj;
 var gameProgresscounter = 0;
 var currentVideo;
-
 $(document).ready(function () {
     speechObj = new SpeechSynthesisUtterance();
     speechObj.rate = 0.7;
@@ -24,8 +23,9 @@ function NextStep1Method() {
 function LoadVideo() {
 
     AjaxRequest('/PlayGround/GetVideo', 'GET', { level: gameProgresscounter }, data => {
-      
-        if (data) {
+
+        debugger;
+        if (data.status) {
            
             $('#playgroundBody').empty().append(`
                       <div id="HeadingSection">
@@ -34,8 +34,8 @@ function LoadVideo() {
                     </h2>
                     </div>
                    <div id="ContentSection">
-                   <video id="PlayergroundVideo" class="${data.videoId}" width="100%" height="290">
-                            <source id="Videosrc" src="/Videos/${data.videoPath}" type="video/mp4" />
+                   <video id="PlayergroundVideo" class="${data.video.videoId}" width="100%" height="290">
+                            <source id="Videosrc" src="/Videos/${data.video.videoPath}" type="video/mp4" />
                     </video>
                   </div>
                 <center>
@@ -55,8 +55,9 @@ function LoadVideo() {
         else {
             $('#playgroundBody').empty().append(`
                       <div id="HeadingSection">
-                           <h2 class="text-center text-bold text-danger"><span id="Instruction">The Game is Over!!!</span>
-                    </h2></div>`);
+                           <h2 class="text-center text-bold text-info"><span id="Instruction">The Game is Over!!!</span>
+                            ${data[0].message}
+                    </h2>`)
             PlaySpeech(`...............${$('#Instruction').text()}...We will notify you once the your progress report is generated......Thanks`);
         }
     })
@@ -80,11 +81,11 @@ function GetVideoMCqs() {
         if (data) {
             $('#HeadingSection').empty().append(`<h3 class="text-center"><span class="text-bold text-success mb-10" id="Level">Level ${gameProgresscounter + 1}</span></h3>
 <h5 class="text-bold text-danger"><span id="Instruction">${data.video}
-                    </h2>`);
+                    </h2> `);
             $('#ContentSection').empty();
             data.videoMcQsOptions.forEach((option,index)=>
             {
-                $('#ContentSection').append(`<div class="quiz" id="quiz" data-videoid="${ VideoId }"  data-toggle="buttons">
+                $('#ContentSection').append(`<div class="quiz" data-videoid="${ VideoId }"  data-toggle="buttons">
                 <label class="element-animation1 text-left btn btn-lg btn-danger btn-block">
                     <input type="radio" class="Selectoption mr-5" value="${option.optionId}">${option.optionText}</label>
                  </div>`);
@@ -100,12 +101,31 @@ function GetVideoMCqs() {
 
 
 $('#playgroundBody').delegate('#SaveMcqs', 'click', function () {
+    debugger;
     gameProgresscounter++;
     var progress = {
-
+        gameProgressVideo: {
+            VideoId: $('.quiz').data('videoid'),
+            }
     }
-    AjaxRequest("/PlayGround/SaveProgress", 'POST',);
-    LoadVideo();
+    let objArr = [];
+    $('.quiz label.active').each(function () {
+        objArr.push({
+            OptionValue: $(this).find('.Selectoption').val()
+        });
+        return objArr;
+
+    });
+    progress["gameProgressDetail"] = objArr;
+    AjaxRequest("/PlayGround/SaveProgress", 'POST', progress, function (data) {
+
+        if (data == "OK") {
+            LoadVideo();
+
+            return;
+        }
+        
+    });
 })
 
 
@@ -127,6 +147,7 @@ $('#playgroundBody').delegate('.Selectoption', 'click', function () {
     })
     if (countercheck > 2) {
         $('.Selectoption').prop('checked', false);
+        $('.quiz label').removeClass("active");
         PopUpAlert("Only two options are required", 'warning', 'Error');
 
     }

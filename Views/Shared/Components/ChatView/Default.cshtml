@@ -11,7 +11,7 @@
                         <div class="card card-danger card-outline direct-chat direct-chat-danger">
                             <div class="card-header">
                                 <h3 class="card-title text-center" style="float:none">
-                                    <i class="" aria-hidden="true">
+                                    <i id="chatusername" aria-hidden="true">
                                     Chat with @(User.FindFirst(ClaimTypes.Role).Value == "AdminUser" ? "User" :"Admin")
                                     </i>
                                     </h3>
@@ -56,9 +56,10 @@
                                                 <span class="direct-chat-name float-left"></span>
                                                 <span class="direct-chat-timestamp float-right">@chat.MessageDate</span>
                                             </div>
+                                              <span class="direct-chat-name float-left">
+                                                                                                Admin
 
-                                            <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
-
+                                                </span>
                                             <div class="direct-chat-text">
                                                @chat.MessageText
                                             </div>
@@ -70,7 +71,9 @@
 
 
                          
-                  <div class="card-footer">
+              
+            </div>
+                <div class="card-footer">
               
                   <div class="input-group">
                     <input type="text" name="message" id="MessageTxt" placeholder="Type Message ..." class="form-control">
@@ -79,8 +82,6 @@
                     </span>
                   </div>
               </div>
-            </div>
-
 
                     </div>
                

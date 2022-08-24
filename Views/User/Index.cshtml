@@ -40,10 +40,8 @@
                         <td>@users.Role</td>
                         <td><a href="#" class="btn btn-info Rendercomponent" endpoint="/User/GetUser?id=@users.UserId">Edit</a>
                             <a href="#" id="@users.UserId" endpoint="/User/DeleteUser" redirecturlpoint="/User/Index" class="btn btn-danger Deletebtn">Delete</a> 
-                             <a href="#" id="@users.UserId" endpoint="/Chat/GetChatsByUserId" class="btn btn-success OpenChat">Chat</a> 
-                         @if(@users.Role != "AdminUser")
-                            { <a href="#" id="@users.UserId" class="btn btn-primary SendReport">Send Report</a> 
-                            }
+                             <a href="#" data-username= "@users.UserName" id="@users.UserId" endpoint="/Chat/GetChatsByUserId" class="btn btn-success OpenChat">Chat</a> 
+                       
                         </td>
                
                     </tr>

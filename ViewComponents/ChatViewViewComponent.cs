@@ -27,11 +27,11 @@ namespace PreventDeskTool.ViewComponents
                 chats = null;
                 return View(chats);
              }
-            //chats = _context.Chat.FromSqlInterpolated($"Exec GetChatByUser @param1 = {currentUserId},@param2 = {role}").ToList();
-            //chats.ForEach((x) =>
-            //{
-            //    x.MessageDate = x.MessageTime.ToString("MM/dd/yyyy h:mm tt");
-            //});
+            chats = _context.Chat.FromSqlInterpolated($"Exec GetChatByUser @param1 = {currentUserId},@param2 = {role}").ToList();
+            chats.ForEach((x) =>
+            {
+                x.MessageDate = x.MessageTime.ToString("MM/dd/yyyy h:mm tt");
+            });
             return View(chats);
         }
     }
