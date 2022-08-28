@@ -23,7 +23,7 @@ function NextStep1Method() {
 function LoadVideo() {
 
     AjaxRequest('/PlayGround/GetVideo', 'GET', { level: gameProgresscounter }, data => {
-
+        console.log('dobara chala')
         debugger;
         if (data.status) {
            
@@ -58,7 +58,7 @@ function LoadVideo() {
                            <h2 class="text-center text-bold text-info"><span id="Instruction">The Game is Over!!!</span>
                             ${data[0].message}
                     </h2>`)
-            PlaySpeech(`...............${$('#Instruction').text()}...We will notify you once the your progress report is generated......Thanks`);
+           
         }
     })
 }
@@ -90,7 +90,7 @@ function GetVideoMCqs() {
                     <input type="radio" class="Selectoption mr-5" value="${option.optionId}">${option.optionText}</label>
                  </div>`);
            })
-            PlaySpeech(` It is Level ${gameProgresscounter + 1} ${data.video}`);
+        //   PlaySpeech(` It is Level ${gameProgresscounter + 1} ${data.video}`);
             $('#ButtonsSection').empty().append(`<button type="button" class="btn btn-primary" id="SaveMcqs">Save</button>`)
           
 
@@ -102,7 +102,6 @@ function GetVideoMCqs() {
 
 $('#playgroundBody').delegate('#SaveMcqs', 'click', function () {
     debugger;
-    gameProgresscounter++;
     var progress = {
         gameProgressVideo: {
             VideoId: $('.quiz').data('videoid'),
@@ -120,11 +119,14 @@ $('#playgroundBody').delegate('#SaveMcqs', 'click', function () {
     AjaxRequest("/PlayGround/SaveProgress", 'POST', progress, function (data) {
 
         if (data == "OK") {
+            gameProgresscounter++;
+
             LoadVideo();
 
             return;
         }
-        
+
+        PopUpAlert("SELECT OPTION PLEASE", 'wrong', 'Error');
     });
 })
 

@@ -18,7 +18,8 @@ namespace PreventDeskTool.ViewComponents
         {
             int Totalvideos = _context.Videos.ToList().Count;
             int Totalusers = _context.Users.ToList().Count;
-            return View(Tuple.Create(Totalusers,Totalvideos));
+            int totaltaskscompleted = _context.GameProgress.ToList().Count;
+            return View(Tuple.Create(Totalusers,Totalvideos, totaltaskscompleted));
         }
     }
 }

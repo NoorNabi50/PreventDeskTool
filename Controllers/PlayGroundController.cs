@@ -31,9 +31,9 @@ namespace PreventDeskTool.Controllers
         {
             try
             {
-                var videos = dBContext.Videos.Where(x => x.DifficultyCategory == level).ToList();
-                var video = videos[new Random().Next(0,videos.Count)];
+                var video = dBContext.Videos.Where(c => dBContext.VideoMCQs.Select(b => b.VideoId).Contains(c.VideoId)).ToList()[level];
                 return Json(new { video, status = true });
+                
 
             }
 
@@ -76,6 +76,8 @@ namespace PreventDeskTool.Controllers
                 progress.gameProgressVideo.ProgressId = progressid;
                 dBContext.GameProgressVideo.Add(progress.gameProgressVideo);
                 dBContext.SaveChanges();
+                if (progress.gameProgressDetail == null)
+                    return "Failed";
                 progress.gameProgressDetail.ForEach((x) =>
                 {
                     x.GameProgressVideoId = progressid;

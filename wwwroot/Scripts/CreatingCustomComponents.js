@@ -56,7 +56,6 @@ function PopUpAlert(message,type,heading) {
 
 
 function AjaxRequest(URL, Type, obj, CallBack) {
-   
     $.ajax({
         url: URL,
         datatype: 'JSON',

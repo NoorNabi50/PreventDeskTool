@@ -2,8 +2,9 @@
 
 let chatlistConatiner = $('.direct-chat-messages');
 var chatuserid = 0;
-
-
+const Userid = $('#userid').val();
+const Role = $('#roleid').val()
+let Timeinterval;
 $('.SendMessage').click(() => {
     SendMessage();
 })
@@ -37,7 +38,7 @@ function SendMessage() {
                                             <span class="direct-chat-timestamp float-left">${data.messageDate}</span>
                                         </div>
 
-                                        <img class="direct-chat-img" src="/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
+                                   
 
                                         <div class="direct-chat-text">
                                       ${data.messageText}
@@ -50,30 +51,47 @@ function SendMessage() {
     })
 
 }
+debugger;
+if (Role != "AdminUser") {
+
+    Timeinterval = setInterval(function () {
+        GetUserChats(Userid)
+        chatlistConatiner.scrollTop(chatlistConatiner[0].scrollHeight);
+
+    }, 5000);
+}
+
+
 
 $(partialcomponentbody).delegate(".OpenChat", 'click', function () {
 
     chatuserid = $(this).attr('id');
+    GetUserChats(chatuserid);
+    chatlistConatiner.scrollTop(chatlistConatiner[0].scrollHeight);
+    $('#chatusername').text('').text('Chat with ' + $(this).data('username'));
+
+    $('#chatmodal').click();
+
+})
 
 
-    AjaxRequest("/Chat/GetChatsByUserId", 'GET', { UserId: chatuserid }, (data) => {
+function GetUserChats(id) {
+
+    AjaxRequest("/Chat/GetChatsByUserId", 'GET', { UserId: id }, (data) => {
+        chatlistConatiner.empty();
+
         if (data && data.length > 0) {
             console.log(data);
-            $('#chatusername').text('').text('Chat with '+$(this).data('username'));
-            chatlistConatiner.empty();
             for (let item of data) {
 
-                if (item.messageBy == "AdminUser") {
-                    chatlistConatiner.append(`<div class="direct-chat-msg">
+                if (item.messageBy == Role) {
+                    chatlistConatiner.append(`<div class="direct-chat-msg right">
             <div class="direct-chat-infos clearfix">
                 <span class="direct-chat-name float-right">
                     Me
                 </span>
                 <span class="direct-chat-timestamp float-left">${item.messageDate}</span>
             </div>
-
-            
-
                 <div class="direct-chat-text">
                     ${item.messageText}
                 </div>
@@ -81,7 +99,7 @@ $(partialcomponentbody).delegate(".OpenChat", 'click', function () {
         </div>`);
                 }
                 else {
-                    chatlistConatiner.append(`<div class="direct-chat-msg right">
+                    chatlistConatiner.append(`<div class="direct-chat-msg">
             <div class="direct-chat-infos clearfix">
                 <span class="direct-chat-name float-left"></span>
                 <span class="direct-chat-timestamp float-right">${item.messageDate}</span>
@@ -97,13 +115,15 @@ $(partialcomponentbody).delegate(".OpenChat", 'click', function () {
 
             }
 
-            $('#chatmodal').click();
 
         }
 
         else {
             chatlistConatiner.append(`<p class="text-center" id="NoMessagesYet">No Messages Yet..</p>`);
+
         }
+
+
     })
 
-})
+}

@@ -47,27 +47,28 @@ function RenderUploadedVideoUi(data) {
      if (data) {
         PopUpAlert("Video Uploaded Successfully", 'success', 'SAVED');
         $(container).empty();
-        const markup = `<div class="row">
+         const markup = `<div class="row">
+                      <div class="col-sm-2"></div>
                     <div class="col-sm-6">
                         <a href="#" data-title="">
-                            <video id="showvideo" class="${data.videoId}" controls width="100%" height="290">
+                            <video style="border:1px solid white;" id="showvideo" class="${data.videoId}" controls width="100%" height="290">
                                 <source id="videosrc" src="/Videos/${data.videoPath}" type="video/mp4" />
                             </video>
                         </a>
                            <center>
                        </center> <br>
                  </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-10">
                      <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Add MCQs Options</h3>
+                      <h3 class="card-title">Add Hazards</h3>
                   </div>
-                     <div style="height:300px;overflow-y:scroll" class="McqsQuestions">
+                     <div /*style="height:300px;overflow-y:scroll"*/ class="McqsQuestions">
                   <table class="table">
                   <thead>
                   <tr>
-                 <th>Option</th>
-                 <th>Percentage</th>
+                 <th class="col-sm-10">Hazard Description</th>
+                 <th>Weightage</th>
                  <th>Actions </th>
                  </tr>
                   <tr>
@@ -104,11 +105,16 @@ $('#partialComponentbody').delegate('#Addbtn', 'click', function () {
 
     $('#optiontextBox').val('');
     $('#percentagetextBox').val('');
+    window.scrollTo(0, document.body.scrollHeight);
+
+
 });
 
 $('#partialComponentbody').delegate('#Removebtn', 'click', function () {
 
     $(this).closest('tr').remove();
+    window.scrollTo(0, document.body.scrollHeight);
+
 });
 
 
@@ -128,7 +134,7 @@ $('#partialComponentbody').delegate('#SaveData', 'click', function () {
 
         RenderPartial('/Videos/Index', $('#partialComponentbody'));
 
-        ToastAlert('Saved', 'success', 'teal');
+        ToastAlert('Saved', 'success', 'white');
 
     });
 });

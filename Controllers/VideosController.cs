@@ -27,7 +27,7 @@ namespace PreventDeskTool.Controllers
         public IActionResult Index()
         {
          
-            return View(context.Videos.ToList());
+            return View(context.Videos.Where(c => context.VideoMCQs.Select(b=>b.VideoId).Contains(c.VideoId)));
         }
         
 
