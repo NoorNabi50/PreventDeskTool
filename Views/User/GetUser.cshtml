@@ -48,6 +48,11 @@
                  </div>
 
                  <div class="form-group">
+                     <label for="exampleInputPassword1">Age</label>
+                     @Html.TextBoxFor(m => m.Age, new { @class = "form-control", placeholder = "Enter Age" })
+                 </div>
+
+                 <div class="form-group">
                      <label for="exampleInputPassword1">Role </label><label class="text-info"></label>
                         @{ 
                              var UserTypes = new List<string>() {

@@ -80,13 +80,17 @@ function GetVideoMCqs() {
         console.log(data);
         if (data) {
             $('#HeadingSection').empty().append(`<h3 class="text-center"><span class="text-bold text-success mb-10" id="Level">Level ${gameProgresscounter + 1}</span></h3>
-<h5 class="text-bold text-danger"><span id="Instruction">${data.video}
+<h5 class="text-bold text-danger"><span class="text-white" id="Instruction">${data.video}
                     </h2> `);
             $('#ContentSection').empty();
             data.videoMcQsOptions.forEach((option,index)=>
             {
                 $('#ContentSection').append(`<div class="quiz" data-videoid="${ VideoId }"  data-toggle="buttons">
-                <label class="element-animation1 text-left btn btn-lg btn-danger btn-block">
+                <label style="
+    background-color: darkgray;
+    border: none;
+    border-radius: 12px;
+" class="element-animation1 text-left btn btn-lg btn-danger btn-block">
                     <input type="radio" class="Selectoption mr-5" value="${option.optionId}">${option.optionText}</label>
                  </div>`);
            })

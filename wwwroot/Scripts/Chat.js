@@ -51,15 +51,19 @@ function SendMessage() {
     })
 
 }
-debugger;
-if (Role != "AdminUser") {
 
-    Timeinterval = setInterval(function () {
-        GetUserChats(Userid)
-        chatlistConatiner.scrollTop(chatlistConatiner[0].scrollHeight);
 
+Timeinterval = setInterval(function () {
+        if (Role == "AdminUser" && $('#modal-info').is(':visible')) {
+            GetUserChats(chatuserid)
+            chatlistConatiner.scrollTop(chatlistConatiner[0].scrollHeight);
+        }
+        else {
+            GetUserChats(Userid)
+            chatlistConatiner.scrollTop(chatlistConatiner[0].scrollHeight);
+        }
     }, 5000);
-}
+
 
 
 
