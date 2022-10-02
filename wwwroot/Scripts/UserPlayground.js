@@ -23,7 +23,7 @@ function NextStep1Method() {
 function LoadVideo() {
 
     AjaxRequest('/PlayGround/GetVideo', 'GET', { level: gameProgresscounter }, data => {
-        console.log('dobara chala')
+        console.log(data)
         debugger;
         if (data.status) {
            
@@ -90,6 +90,7 @@ function GetVideoMCqs() {
     background-color: darkgray;
     border: none;
     border-radius: 12px;
+  COLOR : BLACK;
 " class="element-animation1 text-left btn btn-lg btn-danger btn-block">
                     <input type="radio" class="Selectoption mr-5" value="${option.optionId}">${option.optionText}</label>
                  </div>`);
