@@ -5,8 +5,8 @@ MY FINAL YEAR PROJECT's WEB MODULE
 1-ASP.NET CORE MVC <br>
 2-MSSQL SERVER Database <br>
 3-ENTITY FRAMEWORK CORE ORM <br>
-4-Chart.js Library <br>
-5-SweetAlert Library <br>
+4-CHART.JS Library <br>
+5-SWEETALERT LIBRARY <br>
 6-JAVASCRIPT/JQUERY <br>
 7-BOOTSTRAP <br>
 
