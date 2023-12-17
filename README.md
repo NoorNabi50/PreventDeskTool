@@ -1,18 +1,5 @@
  <h1>Project Title: PreventDeskTool - Final Year Project Web Module</h1>
 
-<h2>Table of Contents</h2>
-    <ul>
-        <li><a href="#description">Description</a></li>
-        <li><a href="#technologies-used">Technologies Used</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#getting-started">Getting Started</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#usage">Usage</a></li>
-        <li><a href="#contributing">Contributing</a></li>
-        <li><a href="#license">License</a></li>
-        <li><a href="#acknowledgments">Acknowledgments</a></li>
- </ul>
-    <hr>
 
   <h2 id="description">Description</h2>
     <p>PreventDeskTool is the web module of my final year project, designed to [briefly describe the main purpose or goal of your project].</p>
