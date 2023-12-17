@@ -3,6 +3,13 @@
 
   <h2 id="description">Description</h2>
     <p>PreventDeskTool is the web module of my final year project</p>
+    <ul>
+     <li>To Educate children about road safety.</li>
+     <li>To introduce activity for students in schools that will educate them about traffic rules and regulations in a healthy and fun way.</li>
+     <li>Providing fun and leisure activity for children by making them play this game.</li>
+     <li>To Reduce the number of hazardous accidents by giving education to students at a very young age.  </li>
+</li>
+    </ul>
    <hr>
 
    <h2 id="technologies-used">Technologies Used</h2>
