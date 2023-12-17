@@ -2,7 +2,8 @@
 
 
   <h2 id="description">Description</h2>
-    <p>PreventDeskTool is the web module of my final year project</p>
+    <p>PreventDeskTool is the web module of my final year project.</p>
+    The aim of this project was
     <ul>
      <li>To Educate children about road safety.</li>
      <li>To introduce activity for students in schools that will educate them about traffic rules and regulations in a healthy and fun way.</li>
