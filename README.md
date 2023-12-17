@@ -3,8 +3,6 @@
 
   <h2 id="description">Description</h2>
     <p>PreventDeskTool is the web module of my final year project, designed to [briefly describe the main purpose or goal of your project].</p>
-    <img src="link-to-screenshot-or-logo.png" alt="Screenshot or Logo">
-
    <hr>
 
    <h2 id="technologies-used">Technologies Used</h2>
